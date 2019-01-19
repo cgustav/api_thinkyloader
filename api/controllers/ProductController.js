@@ -28,7 +28,7 @@ module.exports = {
     execute() usage is elementary for thinky functionality
     */
 
-    orm.models.Product
+    orm.models.Products
       .execute()
       .then((element) => {
         return res.status(200).json(element);
@@ -79,8 +79,8 @@ module.exports = {
 
     const __id = parseInt(req.param('product_id'))
 
-    orm.models.Product.filter({
-        id: __id
+    orm.models.Products.filter({
+        product_id: __id
       }).execute()
 
       .then(product => {
@@ -132,9 +132,9 @@ module.exports = {
     try {
 
       //Looking for existing elements 
-      const number = await orm.models.Product
+      const number = await orm.models.Products
         .filter({
-          id: req.param('product_id')
+          product_id: req.param('product_id')
         }).count().execute();
 
       //Filtering  
@@ -145,8 +145,8 @@ module.exports = {
       }
 
       //Saving
-      orm.models.Product.save({
-        id: req.body.product_id,
+      orm.models.Products.save({
+        product_id: req.body.product_id,
         name: req.body.name,
         description: req.body.description,
         quantity: req.body.quantity
@@ -210,8 +210,8 @@ module.exports = {
       });
     }
     
-    const product = await orm.models.Product.filter({
-        id: __id,
+    const product = await orm.models.Products.filter({
+        product_id: __id,
       }).delete().execute()
       .then((info) => {
         //deleted objects
